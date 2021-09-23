@@ -5,7 +5,6 @@ from insightface.app import FaceAnalysis
 from insightface.data import get_image as ins_get_image
 from insightface.utils import DEFAULT_MP_NAME
 import os
-import pdb
 
 class FaceRecognition(FaceAnalysis):
     def get_single_face(self, img):
