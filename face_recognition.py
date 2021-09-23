@@ -40,7 +40,7 @@ class FaceRecognition(FaceAnalysis):
                     tmp.append(face.normed_embedding)
             tmp = np.mean(tmp, axis=0)
             self.facebase[name] = tmp / np.linalg.norm(tmp)
-        
+
         print("finish reading facebase")
 
     @staticmethod
@@ -71,7 +71,7 @@ class FaceRecognition(FaceAnalysis):
             return None
         return face.normed_embedding
 
-    def draw_on(self, img, threshold=0.5):
+    def draw_on(self, img, threshold=0.35):
         faces = self.get(img)
         dimg = img.copy()
         color = (0, 0, 255)
@@ -129,17 +129,13 @@ def main():
     parser_video.add_argument('-f', '--facebase', type=str, help="path of image base", required=True)
     parser_video.add_argument('-i', '--input', type=str, help='path of input file', required=True)
 
-
     # create the parser for the "img" command
     parser_img = subparsers.add_parser('img', help='use img')
     parser_img.add_argument('-f', '--facebase', type=str, help="path of image base", required=True)
     parser_img.add_argument('-i', '--input', type=str, help='path of input file', required=True)
     parser_img.add_argument('-o', '--output', type=str, help='path of output file', required=True)
 
-
     args = parser.parse_args()
-
-
     app = FaceRecognition()
     app.prepare(ctx_id=0, det_size=(640, 640))
     app.read_facebase(args.facebase)
