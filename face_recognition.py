@@ -25,6 +25,7 @@ class FaceRecognition(FaceAnalysis):
         return result
 
     def read_facebase(self, path):
+        print("start reading facebase")
         self.facebase = {}
         for name in os.listdir(path):
             tmp = []
@@ -39,6 +40,8 @@ class FaceRecognition(FaceAnalysis):
                     tmp.append(face.normed_embedding)
             tmp = np.mean(tmp, axis=0)
             self.facebase[name] = tmp / np.linalg.norm(tmp)
+        
+        print("finish reading facebase")
 
     @staticmethod
     def similarity(vec1, vec2):
